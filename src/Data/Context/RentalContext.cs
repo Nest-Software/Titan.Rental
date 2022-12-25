@@ -1,0 +1,53 @@
+﻿using Data.Entities;
+using Data.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Data.Context;
+
+public class RentalContext : DbContext
+{
+    public RentalContext( DbContextOptions<RentalContext>options): base(options)
+    {
+        
+    }
+    
+    
+    /// <summary>
+    /// Save changes
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var entries = ChangeTracker.Entries()
+            .Where(e => e.Entity is BaseEntity && (e.State == EntityState.Modified || e.State == EntityState.Added));
+
+        foreach (var entry in entries)
+        {
+            if (entry.State == EntityState.Modified)
+                ((BaseEntity)entry.Entity).UpdatedOn = DateTime.Now;
+
+            if (entry.State == EntityState.Added)
+                ((BaseEntity)entry.Entity).CreatedOn = DateTime.Now;
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+
+   
+
+    #region Entities
+
+    public DbSet<Property> Properties { get; set; }
+    public DbSet<FeatureType> FeatureTypes { get; set; }
+    public DbSet<MediaType> MediaTypes { get; set; }
+    public DbSet<PropertyFeature> PropertyFeatures { get; set; }
+    public DbSet<PropertyLocation> PropertyLocations { get; set; }
+    public DbSet<PropertyMedia> PropertyMedias { get; set; }
+    public DbSet<PropertyRental> PropertyRentals { get; set; }
+    public DbSet<PropertySale> PropertySales { get; set; }
+    public DbSet<PropertyView> PropertyViews { get; set; }
+    #endregion
+    
+}
