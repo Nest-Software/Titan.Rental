@@ -6,9 +6,8 @@ public class Property : BaseEntity
 {
    
     public int PropertyId { get; set; }
+    public string? Name { get; set; }
     public long Reference { get; set; }
-    public DateTime AddedDate { get; set; }
-    public DateTime ModifiedDate { get; set; }
     public bool Listed { get; set; }
     public int Size { get; set; }
     public string Description { get; set; }
@@ -18,9 +17,9 @@ public class Property : BaseEntity
     public int? PropertySaleId { get; set; }
     public PropertySale PropertySale { get; set; }
     
-    public int PropertyLocationId { get; set; }
+    public int? PropertyLocationId { get; set; }
     public PropertyLocation PropertyLocation { get; set; }
-    public int BusinessId { get; set; }
+    public int? BusinessId { get; set; }
     public Business Business { get; set; }
 
     public List<PropertyMedia> PropertyMedias { get; set; } = new List<PropertyMedia>();
