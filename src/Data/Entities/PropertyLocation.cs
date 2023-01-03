@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using NetTopologySuite.Geometries;
 
 namespace Data.Entities;
 
@@ -10,6 +11,7 @@ public class PropertyLocation : BaseEntity
     public string Town { get; set; }
     public string Region { get; set; }
     public string Country { get; set; }
-    public string Coordinates { get; set; }
     public Property Property { get; set; }
+    public Point Coordinates { get; set; }
+    public int PropertyId { get; set; }
 }
