@@ -10,6 +10,5 @@ public class PropertyRental : BaseEntity
     public int MinimumTenancy { get; set; }
     public DateTime AvailableDate { get; set; }
     public decimal Rent { get; set; }
-    public int PropertyId { get; set; }
-   
+    public Property Property { get; set; }
 }

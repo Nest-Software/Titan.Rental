@@ -11,8 +11,5 @@ public class PropertyLocation : BaseEntity
     public string Region { get; set; }
     public string Country { get; set; }
     public string Coordinates { get; set; }
-  
-    public int PropertyId { get; set; }
-  
-    
+    public Property Property { get; set; }
 }

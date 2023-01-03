@@ -7,10 +7,8 @@ namespace Data.Context;
 public class RentalContext : DbContext
 {
     public RentalContext( DbContextOptions<RentalContext>options): base(options)
-    {
-        
-    }
-    
+    {    
+    } 
     
     /// <summary>
     /// Save changes
@@ -34,11 +32,7 @@ public class RentalContext : DbContext
         return base.SaveChangesAsync(cancellationToken);
     }
 
-
-   
-
     #region Entities
-
     public DbSet<Property> Properties { get; set; }
     public DbSet<FeatureType> FeatureTypes { get; set; }
     public DbSet<MediaType> MediaTypes { get; set; }
@@ -48,6 +42,10 @@ public class RentalContext : DbContext
     public DbSet<PropertyRental> PropertyRentals { get; set; }
     public DbSet<PropertySale> PropertySales { get; set; }
     public DbSet<PropertyView> PropertyViews { get; set; }
+    public DbSet<DocumentType> DocumentTypes { get; set; }
+    public DbSet<BusinessDocument> BusinessDocuments { get; set; }
+    public DbSet<Business> Businesses { get; set; }
+    public DbSet<PropertyTenureType> PropertyTenureTypes { get; set; }
     #endregion
     
 }

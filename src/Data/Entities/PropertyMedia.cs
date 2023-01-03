@@ -8,6 +8,7 @@ public class PropertyMedia : BaseEntity
     public int PropertyMediaId { get; set; }
     public string Path { get; set; }
     public int MediaTypeId { get; set; }
+    public MediaType MediaType { get; set; }
     public int PropertyId { get; set; }
     public Property Property { get; set; }
 }
