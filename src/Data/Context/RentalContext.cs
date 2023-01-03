@@ -34,6 +34,16 @@ public class RentalContext : DbContext
         return base.SaveChangesAsync(cancellationToken);
     }
 
+    #region Configuration
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Property>()
+            .Property(b => b.Reference)
+            .ValueGeneratedOnAdd();
+    }
+
+    #endregion
 
    
 
