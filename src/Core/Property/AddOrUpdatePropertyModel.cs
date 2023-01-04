@@ -2,7 +2,7 @@
 
 namespace Core.Property
 {
-    public class CreatePropertyModel
+    public class AddOrUpdatePropertyModel
     {
         public string Description { get; set; }
         public string Url { get; set; }

@@ -9,12 +9,12 @@ namespace Application.Services
     {
         public PropertyListingService() { }
 
-        public async Task<long> CreatePropetyAsync(CreatePropertyModel model)
+        public async Task<long> CreatePropetyAsync(AddOrUpdatePropertyModel model)
         {
             return await Task.FromResult(0);
         }
 
-        public async Task UpdatePropertyModelAsync(long reference, UpdatePropertyModel model)
+        public async Task UpdatePropertyModelAsync(long reference, AddOrUpdatePropertyModel model)
         {
         }
 
