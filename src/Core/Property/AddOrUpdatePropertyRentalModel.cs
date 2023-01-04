@@ -1,11 +1,11 @@
-﻿namespace Core.Models
+﻿namespace Core.Property
 {
-    public class PropertyRentModel
+    public class AddOrUpdatePropertyRentalModel
     {
         public decimal Deposit { get; set; }
-        public string LetType { get; set; }
+        public int LetType { get; set; }
         public int MinimumTenancy { get; set; }
         public string AvailableDate { get; set; }
-        public decimal Amount { get; set; }
+        public decimal Rent { get; set; }
     }
 }

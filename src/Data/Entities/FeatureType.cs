@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Data.Interfaces;
-using Data.Models;
+﻿using Data.Models;
 
 namespace Data.Entities;
 

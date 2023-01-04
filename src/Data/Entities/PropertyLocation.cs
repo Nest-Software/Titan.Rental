@@ -1,6 +1,5 @@
 ﻿using Data.Models;
 using NetTopologySuite.Geometries;
-
 namespace Data.Entities;
 
 public class PropertyLocation : BaseEntity

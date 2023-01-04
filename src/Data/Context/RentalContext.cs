@@ -56,6 +56,7 @@ public class RentalContext : DbContext
     public DbSet<BusinessDocument> BusinessDocuments { get; set; }
     public DbSet<Business> Businesses { get; set; }
     public DbSet<PropertyTenureType> PropertyTenureTypes { get; set; }
+    public DbSet<PropertyLetType> PropertyLetTypes { get; set; }
     #endregion
     
 }

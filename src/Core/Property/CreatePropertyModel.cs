@@ -5,6 +5,8 @@ namespace Core.Property
     public class CreatePropertyModel
     {
         public string Description { get; set; }
+        public string Url { get; set; }
+        public PropertyLocationModel PropertyLocationLocation { get; set; }
         public List<PropertyFeatureModel> PropertyFeatures { get; set; } = new List<PropertyFeatureModel>();
     }
 }

@@ -2,15 +2,19 @@
 using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application;
-
-public class ServiceRegistration
+namespace Application
 {
-    public static void DependencyInjects(IServiceCollection services)
+    public static class ServiceRegistration
     {
-        #region Respositories
-        services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
-        
-        #endregion
+        public static IServiceCollection RegisterServices(this IServiceCollection services) 
+        {
+            services.AddScoped<IPropertyListingService, PropertyListingService>();
+            services.AddScoped<IPropertyRentalService, PropertyRentalService>();
+            services.AddScoped<IPropertySaleService, PropertySaleService>();
+            services.AddScoped<IPropertyViewService, PropertyViewService>();
+            services.AddScoped<IPropertyMediaService, PropertyMediaService>();
+
+            return services;
+        }
     }
 }
