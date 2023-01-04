@@ -9,5 +9,6 @@ namespace Application.Interfaces
         Task<PropertyRentModel> GetPropertyRentalAsync(long rentalId);
         Task RemovePropertyRentalAsync(int rentalId);
         Task UpdatePropertyRentalAsync(long rentalId, AddOrUpdatePropertyRentalModel model);
+        Task<IEnumerable<PropertyLetTypeModel>> GetPropertyLetTypesAsync();
     }
 }

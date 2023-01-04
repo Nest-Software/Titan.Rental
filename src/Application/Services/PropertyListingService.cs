@@ -35,6 +35,11 @@ namespace Application.Services
             long query, int pageNumber, int pageSize)
         {
             return null;
-        }        
+        }
+        
+        public async Task<IEnumerable<FeatureTypeModel>> GetFeatureTypesAsync()
+        {
+            return null;
+        }
     }
 }

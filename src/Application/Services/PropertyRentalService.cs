@@ -24,5 +24,10 @@ namespace Application.Services
         {
             return null;
         }
+
+        public async Task<IEnumerable<PropertyLetTypeModel>> GetPropertyLetTypesAsync()
+        {
+            return null;
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Application.Interfaces
         Task UpdatePropertySaleAsync(int saleId, AddOrUpdatePropertySaleModel model);
         Task RemovePropertySaleAsync(int saleId);
         Task<PropertySaleModel> GetPropertySaleAsync(long saleId);
+        Task<IEnumerable<PropertyTenureTypeModel>> GetPropertyTenuresAsync();
     }
 }

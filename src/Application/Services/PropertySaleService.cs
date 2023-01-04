@@ -24,5 +24,10 @@ namespace Application.Services
         {
             return null;
         }
+
+        public async Task<IEnumerable<PropertyTenureTypeModel>> GetPropertyTenuresAsync()
+        {
+            return null;
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class PropertyFeatureModel
     {
-        public string Name { get; set; }
+        public string Feature { get; set; }
         public string Description { get; set; }
     }
 }

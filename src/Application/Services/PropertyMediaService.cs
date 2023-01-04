@@ -22,5 +22,10 @@ namespace Application.Services
         public async Task RemovePropertMediaAsync(int mediaId)
         {
         }
+
+        public async Task<IEnumerable<MediaTypeModel>> GetMediaTypesAsync()
+        {
+            return null;
+        }
     }
 }

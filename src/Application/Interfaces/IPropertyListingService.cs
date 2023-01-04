@@ -12,5 +12,6 @@ namespace Application.Interfaces
         Task ListPropertyAsync(long reference);
         Task RemovePropertyAsync(long reference);
         Task UpdatePropertyModelAsync(long reference, AddOrUpdatePropertyModel updatePropertyModel);
+        Task<IEnumerable<FeatureTypeModel>> GetFeatureTypesAsync();
     }
 }
