@@ -5,5 +5,6 @@
         public decimal Amount { get; set; }
         public int Tenure { get; set; }
         public string AvailableDate { get; set; }
+        public int PropertyId { get; set; }
     }
 }

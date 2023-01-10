@@ -6,8 +6,9 @@ namespace Application.Interfaces
 {
     public interface IPropertyListingService
     {
-        Task<long> CreatePropetyAsync(AddOrUpdatePropertyModel createPropertyModel);
-        Task<PageResult<IEnumerable<PropertyModel>>> GetPagedProperty(long query, int pageNumber, int pageSize);
+        Task<long> CreatePropertyAsync(AddOrUpdatePropertyModel createPropertyModel);
+
+        Task<PageResult<IEnumerable<PropertyModel>>> GetPagedProperty(PropertyFilter query);
         Task<PropertyModel> GetPropertyAsync(long reference);
         Task ListPropertyAsync(long reference);
         Task RemovePropertyAsync(long reference);

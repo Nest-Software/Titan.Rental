@@ -10,7 +10,6 @@
         public PropertyLocationModel Location { get; set; }
         public BusinessModel Business { get; set; }
         public List<PropertyFeatureModel> PropertyFeatures { get; set; } = new List<PropertyFeatureModel>();
-        public List<PropertyMediaModel> PropertyMediaModels { get; set; } = new List<PropertyMediaModel>();
         public List<PropertyMediaModel> PropertyMedias { get; set; } = new List<PropertyMediaModel>();
     }
 }
