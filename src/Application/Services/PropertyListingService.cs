@@ -60,6 +60,7 @@ namespace Application.Services
 
         public async Task ListPropertyAsync(long reference)
         {
+            
         }
 
         public async Task RemovePropertyAsync(long reference)

@@ -20,6 +20,14 @@ namespace Application.Services
         public async Task AddPropertySaleAsync(long reference, AddOrUpdatePropertySaleModel model)
         {
 
+
+            var property = await _rentalContext.Properties.FirstOrDefaultAsync(i => i.Reference.Equals(reference));
+
+            if (property == null)
+            {
+                throw new FileNotFoundException($"Property sale not found ");
+            }
+            
             var propertySale = model.Adapt<PropertySale>();
             await _rentalContext.PropertySales.AddAsync(propertySale);
             await _rentalContext.SaveChangesAsync();
