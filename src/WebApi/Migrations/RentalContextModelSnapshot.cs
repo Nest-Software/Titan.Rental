@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 
 #nullable disable
 
@@ -34,33 +35,27 @@ namespace WebApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TIN")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -74,7 +69,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("BusinessId");
 
-                    b.ToTable("Business");
+                    b.ToTable("Businesses");
                 });
 
             modelBuilder.Entity("Data.Entities.BusinessDocument", b =>
@@ -95,7 +90,6 @@ namespace WebApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Reference")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -107,7 +101,7 @@ namespace WebApi.Migrations
 
                     b.HasIndex("DocumentTypeId");
 
-                    b.ToTable("BusinessDocument");
+                    b.ToTable("BusinessDocuments");
                 });
 
             modelBuilder.Entity("Data.Entities.DocumentType", b =>
@@ -119,14 +113,12 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentTypeId"));
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Required")
@@ -137,7 +129,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("DocumentTypeId");
 
-                    b.ToTable("DocumentType");
+                    b.ToTable("DocumentTypes");
                 });
 
             modelBuilder.Entity("Data.Entities.FeatureType", b =>
@@ -149,14 +141,12 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureTypeId"));
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -176,14 +166,12 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MediaTypeId"));
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -202,61 +190,36 @@ namespace WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyId"));
 
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("BusinessId")
+                    b.Property<int?>("BusinessId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Listed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PropertyLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertyLocationId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PropertyRentalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertyRentalId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PropertySaleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertySaleId1")
-                        .HasColumnType("int");
-
                     b.Property<long>("Reference")
-                        .HasColumnType("bigint");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("Reference")
+                        .HasDefaultValueSql("NULL");
 
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
+                    b.Property<string>("ShortDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("PropertyId");
 
                     b.HasIndex("BusinessId");
-
-                    b.HasIndex("PropertyLocationId1");
-
-                    b.HasIndex("PropertyRentalId1");
-
-                    b.HasIndex("PropertySaleId1");
 
                     b.ToTable("Properties");
                 });
@@ -273,7 +236,6 @@ namespace WebApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FeatureTypeId")
@@ -297,6 +259,25 @@ namespace WebApi.Migrations
                     b.ToTable("PropertyFeatures");
                 });
 
+            modelBuilder.Entity("Data.Entities.PropertyLetType", b =>
+                {
+                    b.Property<int>("PropertyLetTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyLetTypeId"));
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PropertyLetTypeId");
+
+                    b.ToTable("PropertyLetTypes");
+                });
+
             modelBuilder.Entity("Data.Entities.PropertyLocation", b =>
                 {
                     b.Property<int>("PropertyLocationId")
@@ -306,39 +287,36 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyLocationId"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Coordinates")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Point>("Coordinates")
+                        .HasColumnType("geography");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Region")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Town")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PropertyLocationId");
+
+                    b.HasIndex("PropertyId")
+                        .IsUnique();
 
                     b.ToTable("PropertyLocations");
                 });
@@ -354,11 +332,13 @@ namespace WebApi.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MediaTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Path")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PropertyId")
@@ -368,6 +348,8 @@ namespace WebApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("PropertyMediaId");
+
+                    b.HasIndex("MediaTypeId");
 
                     b.HasIndex("PropertyId");
 
@@ -382,7 +364,10 @@ namespace WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyRentalId"));
 
-                    b.Property<DateTime>("AvailableDate")
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("AvailableDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedOn")
@@ -391,23 +376,24 @@ namespace WebApi.Migrations
                     b.Property<decimal>("Deposit")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("LetType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("MinimumTenancy")
                         .HasColumnType("int");
 
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Rent")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("PropertyLetTypeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PropertyRentalId");
+
+                    b.HasIndex("PropertyId")
+                        .IsUnique();
+
+                    b.HasIndex("PropertyLetTypeId");
 
                     b.ToTable("PropertyRentals");
                 });
@@ -423,10 +409,16 @@ namespace WebApi.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime?>("AvailableDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyTenureTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -434,7 +426,31 @@ namespace WebApi.Migrations
 
                     b.HasKey("PropertySaleId");
 
+                    b.HasIndex("PropertyId")
+                        .IsUnique();
+
+                    b.HasIndex("PropertyTenureTypeId");
+
                     b.ToTable("PropertySales");
+                });
+
+            modelBuilder.Entity("Data.Entities.PropertyTenureType", b =>
+                {
+                    b.Property<int>("PropertyTenureTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyTenureTypeId"));
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PropertyTenureTypeId");
+
+                    b.ToTable("PropertyTenureTypes");
                 });
 
             modelBuilder.Entity("Data.Entities.PropertyView", b =>
@@ -445,9 +461,6 @@ namespace WebApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyViewId"));
 
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -455,17 +468,12 @@ namespace WebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PropertyId")
@@ -504,35 +512,9 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("Data.Entities.Business", "Business")
                         .WithMany("Properties")
-                        .HasForeignKey("BusinessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.PropertyLocation", "PropertyLocation")
-                        .WithMany()
-                        .HasForeignKey("PropertyLocationId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.PropertyRental", "PropertyRental")
-                        .WithMany()
-                        .HasForeignKey("PropertyRentalId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.PropertySale", "PropertySale")
-                        .WithMany()
-                        .HasForeignKey("PropertySaleId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BusinessId");
 
                     b.Navigation("Business");
-
-                    b.Navigation("PropertyLocation");
-
-                    b.Navigation("PropertyRental");
-
-                    b.Navigation("PropertySale");
                 });
 
             modelBuilder.Entity("Data.Entities.PropertyFeature", b =>
@@ -554,15 +536,72 @@ namespace WebApi.Migrations
                     b.Navigation("Property");
                 });
 
+            modelBuilder.Entity("Data.Entities.PropertyLocation", b =>
+                {
+                    b.HasOne("Data.Entities.Property", "Property")
+                        .WithOne("PropertyLocation")
+                        .HasForeignKey("Data.Entities.PropertyLocation", "PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Property");
+                });
+
             modelBuilder.Entity("Data.Entities.PropertyMedia", b =>
                 {
+                    b.HasOne("Data.Entities.MediaType", "MediaType")
+                        .WithMany()
+                        .HasForeignKey("MediaTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Data.Entities.Property", "Property")
                         .WithMany("PropertyMedias")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("MediaType");
+
                     b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("Data.Entities.PropertyRental", b =>
+                {
+                    b.HasOne("Data.Entities.Property", "Property")
+                        .WithOne("PropertyRental")
+                        .HasForeignKey("Data.Entities.PropertyRental", "PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.PropertyLetType", "PropertyLetType")
+                        .WithMany()
+                        .HasForeignKey("PropertyLetTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Property");
+
+                    b.Navigation("PropertyLetType");
+                });
+
+            modelBuilder.Entity("Data.Entities.PropertySale", b =>
+                {
+                    b.HasOne("Data.Entities.Property", "Property")
+                        .WithOne("PropertySale")
+                        .HasForeignKey("Data.Entities.PropertySale", "PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.PropertyTenureType", "PropertyTenureType")
+                        .WithMany()
+                        .HasForeignKey("PropertyTenureTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Property");
+
+                    b.Navigation("PropertyTenureType");
                 });
 
             modelBuilder.Entity("Data.Entities.PropertyView", b =>
@@ -592,7 +631,13 @@ namespace WebApi.Migrations
                 {
                     b.Navigation("PropertyFeatures");
 
+                    b.Navigation("PropertyLocation");
+
                     b.Navigation("PropertyMedias");
+
+                    b.Navigation("PropertyRental");
+
+                    b.Navigation("PropertySale");
 
                     b.Navigation("PropertyViews");
                 });

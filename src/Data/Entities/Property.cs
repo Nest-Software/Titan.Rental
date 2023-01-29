@@ -10,10 +10,8 @@ public class Property : BaseEntity
     public string Url { get; set; }
     public bool Listed { get; set; }
     public string Description { get; set; }
-    public int? PropertyRentalId { get; set; }
     public PropertyRental PropertyRental { get; set; }
     public PropertySale PropertySale { get; set; }
-    public int? PropertyLocationId { get; set; }
     public PropertyLocation PropertyLocation { get; set; }
     public int? BusinessId { get; set; }
     public Business Business { get; set; }

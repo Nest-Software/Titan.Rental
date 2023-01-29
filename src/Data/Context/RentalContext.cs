@@ -37,7 +37,10 @@ public class RentalContext : DbContext
     {
         modelBuilder.Entity<Property>()
             .Property(b => b.Reference)
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasColumnName("Reference")
+            .HasDefaultValueSql("NULL")
+            ;
     }
 
     #endregion

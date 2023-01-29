@@ -10,6 +10,7 @@ public class PropertyLocation : BaseEntity
     public string Town { get; set; }
     public string Region { get; set; }
     public string Country { get; set; }
+    
     public Property Property { get; set; }
     public Point Coordinates { get; set; }
     public int PropertyId { get; set; }
