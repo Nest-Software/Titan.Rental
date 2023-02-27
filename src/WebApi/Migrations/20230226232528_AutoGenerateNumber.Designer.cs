@@ -4,6 +4,7 @@ using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,11 @@ using NetTopologySuite.Geometries;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(RentalContext))]
-    partial class RentalContextModelSnapshot : ModelSnapshot
+    [Migration("20230226232528_AutoGenerateNumber")]
+    partial class AutoGenerateNumber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,15 +158,6 @@ namespace WebApi.Migrations
                     b.HasKey("FeatureTypeId");
 
                     b.ToTable("FeatureTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            FeatureTypeId = 1,
-                            Code = "FT01",
-                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Apartment"
-                        });
                 });
 
             modelBuilder.Entity("Data.Entities.MediaType", b =>
@@ -212,8 +206,10 @@ namespace WebApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<long>("Reference")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("bigint");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("Reference")
+                        .HasDefaultValueSql("NULL");
 
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
@@ -227,9 +223,6 @@ namespace WebApi.Migrations
                     b.HasKey("PropertyId");
 
                     b.HasIndex("BusinessId");
-
-                    b.HasIndex("Reference")
-                        .IsUnique();
 
                     b.ToTable("Properties");
                 });
@@ -375,7 +368,6 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyRentalId"));
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("AvailableDate")
@@ -385,7 +377,6 @@ namespace WebApi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Deposit")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MinimumTenancy")
@@ -419,7 +410,6 @@ namespace WebApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertySaleId"));
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("AvailableDate")
