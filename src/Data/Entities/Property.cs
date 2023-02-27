@@ -1,4 +1,5 @@
-﻿using Data.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Data.Models;
 
 namespace Data.Entities;
 
@@ -6,6 +7,7 @@ public class Property : BaseEntity
 {
     public int PropertyId { get; set; }
     public string ShortDescription { get; set; }
+  
     public long Reference { get; set; }
     public string Url { get; set; }
     public bool Listed { get; set; }

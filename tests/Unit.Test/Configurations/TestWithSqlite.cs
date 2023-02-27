@@ -8,10 +8,9 @@ public class TestWithSqlite : IDisposable
 {
     
     private readonly SqliteConnection _connection;
-    private readonly RentalContext _rentalContext;
+    protected readonly RentalContext _rentalContext;
 
     public TestWithSqlite()
-   
     {            
         _connection = new SqliteConnection("DataSource=:memory:");
         _connection.Open();

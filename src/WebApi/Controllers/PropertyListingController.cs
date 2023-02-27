@@ -39,6 +39,7 @@ namespace WebApi.Controllers
         {
             var properties = await _propertyListingService.GetPagedProperty(request);
 
+            
             return Ok(properties);
         }
 

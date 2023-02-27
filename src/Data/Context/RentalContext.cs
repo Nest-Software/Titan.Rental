@@ -35,12 +35,17 @@ public class RentalContext : DbContext
     #region Configuration
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Property>()
-            .Property(b => b.Reference)
-            .ValueGeneratedOnAdd()
-            .HasColumnName("Reference")
-            .HasDefaultValueSql("NULL")
-            ;
+        /*modelBuilder.Entity<Property>()
+            .HasIndex(s => s.Reference)
+            .IsUnique();*/
+
+        modelBuilder.Entity<FeatureType>().HasData(
+            new FeatureType
+            {
+                FeatureTypeId = 1,
+                Code = "FT01",
+                Name = "Apartment"
+            });
     }
 
     #endregion

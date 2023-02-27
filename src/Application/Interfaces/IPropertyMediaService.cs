@@ -6,8 +6,9 @@ namespace Application.Interfaces
 {
     public interface IPropertyMediaService
     {
-        Task CreatePropetyMediaAsync(CreatePropertyMediaModel createPropertyModel);
-        Task<PageResult<IEnumerable<PropertyMediaModel>>> GetPagePropertyMedia(int pageNumber, int pageSize);
+        Task CreatePropertyMediaAsync(CreatePropertyMediaModel createPropertyModel);
+        Task<PageResult<IEnumerable<PropertyMediaModel>>> GetPagePropertyMedia(PropertyMediaFilter query);
+        Task<IEnumerable<MediaTypeModel>> GetMediaTypesAsync();
         Task RemovePropertMediaAsync(int mediaId);
     }
 }
